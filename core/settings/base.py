@@ -17,7 +17,9 @@ APPS = []
 
 THEME_PARTY_APPS = []
 
-THEME = []
+THEME = [
+    'jazzmin'
+]
 
 INSTALLED_APPS = [
     *THEME,
