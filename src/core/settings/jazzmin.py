@@ -22,7 +22,7 @@ JAZZMIN_SETTINGS = {
     "hide_apps": [],
     "hide_models": [],
     "icons": {
-        # app icons
+        # src icons
 
     },
 
