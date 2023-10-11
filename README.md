@@ -24,37 +24,28 @@
 ```
 $ python manage.py makemigrations
 $ python manage.py migrate
+$ python manage.py runserver
 ```
 
-## Redis
-Устанавливаем Redis:
-```
-sudo apt-get install redis-server
-```
+## Запуск через 
 
-Отключаем автозапуск, чтобы не запускался
-```
-$ sudo systemctl disable redis-server
-$ sudo systemctl stop redis-server
-```
 
-Создаём файл конфигурации на основе сэмпла
-```
-$ cp /home/www/taxiber/telegram_bot/data/redis.conf.sample /home/www/taxiber/telegram_bot/data/redis.conf
-```
+### Docker-команды
+Это памятка команд на случай если в проекте будет docker
+Команда     | Назначение
+------------- | -------------
+`docker-compose -f <ваш docker-compose.yml> up -d --build`  | Запуск всех контейнеров
+`docker-compose -f <ваш docker-compose.yml> down -v` | останавливает и удаляет контейнеры.
+`docker-compose -f <ваш docker-compose.yml> up -d --no-deps --build <имя образа> ` | запускает контейнер из указанного образа, используя конфигурацию из файла docker-compose.yml.
+`DATABASE_HOST` | Адрес БД, если на вашей машине, то 127.0.0.1
+`DATABASE_PORT` | Порт, обычно 5432
+`SECRET_KEY` | Секретный ключ Django
 
-Заполняем конфигурационные данные `redis.conf`
-```
-...
-logfile <logfile_path>
-...
-dir <work_dir_path>
-...
-```
 
-Запускаем Redis
+### Выполняем миграции
 ```
-$ redis-server /home/www/taxiber/telegram_bot/data/redis.conf
+$ python manage.py makemigrations
+$ python manage.py migrate
+$ python manage.py runserver
 ```
-
 
