@@ -20,41 +20,23 @@
 `SECRET_KEY` | Секретный ключ Django
 
 
-### Выполняем миграции
+### Выполняем миграции и запуск
 ```
 $ python manage.py makemigrations
 $ python manage.py migrate
+$ python manage.py runserver
 ```
 
-## Redis
-Устанавливаем Redis:
-```
-sudo apt-get install redis-server
-```
 
-Отключаем автозапуск, чтобы не запускался
-```
-$ sudo systemctl disable redis-server
-$ sudo systemctl stop redis-server
-```
-
-Создаём файл конфигурации на основе сэмпла
-```
-$ cp /home/www/taxiber/telegram_bot/data/redis.conf.sample /home/www/taxiber/telegram_bot/data/redis.conf
-```
-
-Заполняем конфигурационные данные `redis.conf`
-```
-...
-logfile <logfile_path>
-...
-dir <work_dir_path>
-...
-```
-
-Запускаем Redis
-```
-$ redis-server /home/www/taxiber/telegram_bot/data/redis.conf
-```
+### Docker, docker-compose команды
+Это памятка команд на случай если в проекте будет docker
+Команда     | Назначение
+------------- | -------------
+`docker-compose -f <ваш docker-compose.yml> up -d --build`  | Запуск всех контейнеров
+`docker-compose -f <ваш docker-compose.yml> down -v` | останавливает и удаляет контейнеры.
+`docker-compose -f <ваш docker-compose.yml> up -d --no-deps --build <имя образа> ` | запускает контейнер из указанного образа, используя конфигурацию из файла docker-compose.yml.
+`docker-compose -f <ваш docker-compose.yml> logs <имя образа>` | Эта команда дает логи(ответ сервера)
+`docker ps` | позволяет смотреть запущенные вами образы
+`docker-compose exec <имя образа> <команда> ` | для выполнения команды внутри контейнера, определенного в файле docker-compose.yml. Например, команда "docker-compose exec <вашего контейнера> python manage.py runserver" выполнит команду "python manage.py runserver" внутри вашего контейнера, который определен в файле docker-compose.yml.
 
 
