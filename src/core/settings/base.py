@@ -1,4 +1,8 @@
+import os
 from pathlib import Path
+
+from moneyed import add_currency
+
 from .env_reader import env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,6 +14,14 @@ THEME_PARTY_APPS = [
     'rest_framework',
     'debug_toolbar',
     'corsheaders',
+    'djmoney',
+]
+
+APPS = [
+    'common',
+    'price',
+    'services',
+    'vacancies',
 ]
 
 THEME = [
@@ -24,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    *THEME_PARTY_APPS
+    *THEME_PARTY_APPS,
+    *APPS
 ]
 # MIDDLEWARE
 MIDDLEWARE = [
@@ -74,22 +87,30 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+KGS = add_currency("SOM", "417", 100)
+
+CURRENCIES = ('SOM',)
+
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATIC_ROOT = BASE_DIR.joinpath("static")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 13,
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly"
+    ],
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -107,3 +128,5 @@ else:
 if DEBUG:
     INTERNAL_IPS = ["127.0.0.1"]
     MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+
+from .jazzmin import JAZZMIN_SETTINGS

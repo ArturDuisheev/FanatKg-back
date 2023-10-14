@@ -4,11 +4,11 @@ JAZZMIN_SETTINGS = {
     "site_brand": "FanatKG Admin Panel!",
     "site_logo_classes": "img-circle",
     # "site_logo": "/assets/icons/admin_logo.png",
-    "site_icon": '/assets/icons/admin_logo.png',
+    "site_icon": '/static/logo-fanat.png',
     "welcome_sign": "Добро пожаловать в панель администратора FanatKG Admin Panel!",
     "copyright": "Geeks Pro",
-    "search_model": "auth.User",
-    "user_avatar": 'None',
+    "search_model": "src.price",
+    "user_avatar": '/static/logo-fanat.png',
     "topmenu_links": [
         {"name": "Главная", "url": "admin:index", "permissions": ["auth.view_user"]},
     ],
@@ -18,13 +18,14 @@ JAZZMIN_SETTINGS = {
         },
     ],
     "show_sidebar": True,
-    "navigation_expanded": False,
+    "navigation_expanded": True,
     "hide_apps": [],
-    "hide_models": [],
+    "hide_models": ['auth.group'],
     "icons": {
         # src icons
 
     },
+
 
     "order_with_respect_to": [
         # apps
@@ -60,8 +61,8 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_compact_style": False,
     "sidebar_nav_legacy_style": True,
     "sidebar_nav_flat_style": False,
-    "theme": "simplex",
-    "dark_mode_theme": None,
+    "theme": "flatly",
+    "dark_mode_theme": "darkly",
     "button_classes": {
         "primary": "btn-outline-primary",
         "secondary": "btn-outline-secondary",
@@ -69,6 +70,9 @@ JAZZMIN_UI_TWEAKS = {
         "warning": "btn-outline-warning",
         "danger": "btn-outline-danger",
         "success": "btn-outline-success"
+
     },
+
     "actions_sticky_top": False
 }
+
