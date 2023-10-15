@@ -4,9 +4,7 @@ from .api import views
 
 router = DefaultRouter()
 
-router.register(r'price', views.PriceViewSet, basename='price')
-router.register(r'HallList', views.HallListViewSet, basename='Halllist')
-
+router.register(r'service', views.ServiceViewSet, basename='service')
 
 urlpatterns = [
     path('', include(router.urls)),

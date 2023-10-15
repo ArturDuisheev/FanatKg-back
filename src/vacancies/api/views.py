@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from vacancies.api import serializers as ser
+from vacancies import models as vac_m
+
+
+class VacancyViewSet(viewsets.ModelViewSet):
+    queryset = vac_m.Vacancy.objects.all()
+    serializer_class = ser.VacancySerializer
