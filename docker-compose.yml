@@ -28,16 +28,6 @@ services:
     env_file:
       - ./src/.env.db/
 
-  nginx:
-    build: ./build/nginx/
-    volumes:
-      - static_volume:/home/app/web/static
-      - media_volume:/home/app/web/media
-    ports:
-      - "80:80"
-    depends_on:
-      - back-end
-
 volumes:
   postgres_data:
   static_volume:
