@@ -7,7 +7,7 @@ JAZZMIN_SETTINGS = {
     "site_icon": '/static/logo-fanat.png',
     "welcome_sign": "Добро пожаловать в панель администратора FanatKG Admin Panel!",
     "copyright": "Geeks Pro",
-    "search_model": "src.price",
+    "search_model": "src.services",
     "user_avatar": '/static/logo-fanat.png',
     "topmenu_links": [
         {"name": "Главная", "url": "admin:index", "permissions": ["auth.view_user"]},

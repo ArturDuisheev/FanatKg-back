@@ -1,6 +1,4 @@
-import os
 from pathlib import Path
-
 from moneyed import add_currency
 
 from .env_reader import env
@@ -15,6 +13,7 @@ THEME_PARTY_APPS = [
     'debug_toolbar',
     'corsheaders',
     'djmoney',
+    'phonenumber_field'
 ]
 
 APPS = [
@@ -22,6 +21,7 @@ APPS = [
     'price',
     'services',
     'vacancies',
+    'contact'
 ]
 
 THEME = [
@@ -116,7 +116,6 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.AllowAny"
     ],
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
-    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
 
 from .cors import *

@@ -12,7 +12,6 @@ class HallAdmin(admin.ModelAdmin):
     inlines = (PriceInline,)
 
 
-
 class HoursDeltaInline(admin.TabularInline):
     model = HourDelta
     extra = 1
