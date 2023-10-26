@@ -15,8 +15,8 @@ class Street(BaseModel):
         return f"улица: {self.street}"
 
     class Meta:
-        verbose_name = _('Street')
-        verbose_name_plural = _('Streets')
+        verbose_name = _('Улица')
+        verbose_name_plural = _('Улицы')
 
 
 class Phone(BaseModel):
@@ -27,6 +27,10 @@ class Phone(BaseModel):
 
     def __str__(self):
         return f'номер телефона: {self.phone}'
+
+    class Meta:
+        verbose_name = _('Телефон')
+        verbose_name_plural = _('Телефоны')
 
 
 class Link(models.Model):
@@ -47,6 +51,10 @@ class Link(models.Model):
 
     def __str__(self):
         return f'соц.сеть: {self.title}'
+
+    class Meta:
+        verbose_name = _('Ссылка')
+        verbose_name_plural = _('Ссылки')
 
 
 class Contact(models.Model):
