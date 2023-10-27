@@ -14,6 +14,7 @@ THEME_PARTY_APPS = [
     'corsheaders',
     'djmoney',
     'phonenumber_field'
+    'drf_yasg',
 ]
 
 APPS = [

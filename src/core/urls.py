@@ -3,13 +3,14 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('price/', include('price.urls')),
     path('service/', include('services.urls')),
     path('vacancies/', include('vacancies.urls')),
     path('contact/', include('contact.urls')),
-]
+] + urls_swagger
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
