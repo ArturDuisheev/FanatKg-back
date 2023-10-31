@@ -14,7 +14,7 @@ JAZZMIN_SETTINGS = {
     ],
     "usermenu_links": [
         {
-            # "model": "user.User",
+            "model": "user.User",
         },
     ],
     "show_sidebar": True,
@@ -22,12 +22,12 @@ JAZZMIN_SETTINGS = {
     "hide_apps": [],
     "hide_models": [],
     "icons": {
-        # src icons
+        # 'src icons'
 
     },
 
     "order_with_respect_to": [
-        # apps
+        'apps'
     ],
 
     "default_icon_parents": "fas fa-chevron-circle-right",

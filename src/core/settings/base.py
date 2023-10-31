@@ -1,6 +1,8 @@
 from pathlib import Path
 from .env_reader import env
 
+from .jazzmin import JAZZMIN_SETTINGS
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Production
@@ -10,6 +12,17 @@ THEME_PARTY_APPS = [
     'rest_framework',
     'debug_toolbar',
     'corsheaders',
+    "phonenumber_field",
+    'drf_yasg',
+
+]
+
+APPS = [
+    'common',
+    'price',
+    'services',
+    'vacancies',
+    'contact'
 ]
 
 THEME = [
@@ -18,14 +31,17 @@ THEME = [
 
 INSTALLED_APPS = [
     *THEME,
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    *THEME_PARTY_APPS
+    *THEME_PARTY_APPS,
+    *APPS
 ]
+
 # MIDDLEWARE
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -74,7 +90,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -85,17 +100,32 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = BASE_DIR.joinpath("static/")
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR.joinpath("media/")
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 13,
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny"
+    ],
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
-    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
+
+gettext = lambda s: s
+LANGUAGES = (
+    ('ru', gettext('Russian')),
+    ('en', gettext('English')),
+    ('ky', gettext('Kyrgyz')),
+)
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
+# MODELTRANSLATION_TRANSLATION_REGISTRY = 'FanatKg-back.translation.py'
 
 from .cors import *
 
