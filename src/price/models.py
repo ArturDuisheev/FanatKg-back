@@ -1,72 +1,55 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from djmoney.models.fields import MoneyField
 
 from common.models import BaseModel
 
 
-class HourDelta(BaseModel):
-    price = MoneyField(
-        _('price'),
-        max_digits=10,
-        decimal_places=0,
+class Location(BaseModel):
+    name = models.CharField(
+        _('Улица'),
+        max_length=80,
     )
-    price_model = models.ForeignKey(
-        'Price',
-        verbose_name=_('price'),
-        related_name='hours_delta_list',
-        on_delete=models.CASCADE
-    )
-    to = models.CharField(
-        _('to'),
-        max_length=255,
+    image = models.ImageField(
+        _('Фото'),
+        upload_to='images/price/',
+        blank=True,
         null=True,
-        blank=True
     )
-    from_hour = models.CharField(
-        _('from'),
-        max_length=255,
-        null=True,
-        blank=True
-
-    )
-
-
-class Price(BaseModel):
-    hour = models.CharField(
-        _('hour'),
-        max_length=255,
-    )
-    hall = models.ForeignKey(
-        'HallList',
-        verbose_name=_('hall'),
-        related_name='price_list',
-        on_delete=models.CASCADE
+    privilege = models.ManyToManyField(
+        'Privilege',
+        related_name='privilege_location',
+        verbose_name='Описание прайса'
     )
 
     def __str__(self):
-        return f'{self.hour}'
+        return f'филиал: {self.name}'
 
     class Meta:
         verbose_name = _('Прайс')
         verbose_name_plural = _('Прайсы')
 
 
-class HallList(BaseModel):
-    title = models.CharField(
-        _('title'),
-        max_length=255,
+class Privilege(BaseModel):
+    name = models.CharField(
+        _('Название зала'),
+        max_length=70
     )
-    street = models.CharField(
-        _('street'),
-        max_length=255,
-        null=True,
-        blank=True
+    image = models.ImageField(
+        _('Изображение'),
+        upload_to='images/price/',
+        blank=True,
+        null=True
+    )
+    price_image = models.ImageField(
+        _('Изображение прайсов'),
+        upload_to='images/price_in_depth/',
+        blank=True,
+        null=True
     )
 
     def __str__(self):
-        return f'зал: {self.title} | филиал: {self.street}'
+        return f'Название зала: {self.name}'
 
     class Meta:
-        verbose_name = _('Список залов')
-        verbose_name_plural = _('Списки залов')
+        verbose_name = _('Описание прайса')
+        verbose_name_plural = _('Описание прайсов')

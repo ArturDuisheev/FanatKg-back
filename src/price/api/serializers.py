@@ -2,24 +2,33 @@ from rest_framework import serializers
 from price import models as price_models
 
 
-class HoursDeltaSerializer(serializers.ModelSerializer):
+class PrivilegeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = price_models.HourDelta
-        fields = ('id', 'price', 'price_currency', 'to', 'from_hour')
+        model = price_models.Privilege
+        fields = (
+            'id',
+            'name',
+            'image',
+            'price_image')
 
 
-class PriceSerializer(serializers.ModelSerializer):
-    hours_delta_list = HoursDeltaSerializer(many=True, required=False)
-
-    class Meta:
-        model = price_models.Price
-        fields = ('id', 'hour', 'hours_delta_list')
-
-
-class HallListSerializer(serializers.ModelSerializer):
-    created_at = serializers.DateTimeField(format='%Y-%m-%d %H:%M', read_only=True)
-    price_list = PriceSerializer(many=True, required=False)
+class LocationSerializer(serializers.ModelSerializer):
+    privilege = PrivilegeSerializer(many=True)
 
     class Meta:
-        model = price_models.HallList
-        fields = ('id', 'title', 'street', 'price_list', 'created_at')
+        model = price_models.Location
+        fields = (
+            'id',
+            'name',
+            'image',
+            'privilege')
+
+    def create(self, validated_data):
+        privileges_data = validated_data.pop('privilege', [])
+        location = price_models.Location.objects.create(**validated_data)
+        # всех приветсвует программа утренний итератор )))))
+        for privilege_data in privileges_data:
+            privilege, created = price_models.Privilege.objects.get_or_create(**privilege_data)
+            location.privilege.add(privilege)
+
+        return location

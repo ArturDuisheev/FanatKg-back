@@ -16,7 +16,7 @@ from contact import models as con_model
 # class ContactAdmin(admin.ModelAdmin):
 #     inlines = (StreetInline, PhoneInline, LinkInline)
 
-admin.site.register(con_model.Street)
+admin.site.register(con_model.Address)
 admin.site.register(con_model.Phone)
 admin.site.register(con_model.Link)
 admin.site.register(con_model.Contact)

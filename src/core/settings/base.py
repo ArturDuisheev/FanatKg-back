@@ -13,7 +13,7 @@ THEME_PARTY_APPS = [
     'debug_toolbar',
     'corsheaders',
     'djmoney',
-    'phonenumber_field'
+    'phonenumber_field',
     'drf_yasg',
 ]
 

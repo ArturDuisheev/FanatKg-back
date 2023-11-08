@@ -4,19 +4,25 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
 from common.models import BaseModel
+from contact import choices
 
 
-class Street(BaseModel):
-    street = models.TextField(
+class Address(BaseModel):
+    address = models.TextField(
         _('Street'),
+    )
+    phones = models.ManyToManyField(
+        'Phone',
+        related_name='street_phone',
+        verbose_name='Номер телефона'
     )
 
     def __str__(self):
-        return f"улица: {self.street}"
+        return f"Филиал: {self.address}"
 
     class Meta:
-        verbose_name = _('Улица')
-        verbose_name_plural = _('Улицы')
+        verbose_name = _('Филиал')
+        verbose_name_plural = _('Филиалы')
 
 
 class Phone(BaseModel):
@@ -34,23 +40,16 @@ class Phone(BaseModel):
 
 
 class Link(models.Model):
-    title = models.CharField(
-        _('Title'),
-        max_length=60
-    )
-    icon = models.ImageField(
-        _('Icon'),
-        upload_to="contact/icons/",
-        validators=[
-            val.FileExtensionValidator(allowed_extensions=[
-                'png', 'jpg', 'jpeg', 'ico'
-            ])
-        ]
+    social_media = models.CharField(
+        'Соц.Сети',
+        max_length=17,
+        choices=choices.SocialMedia.choices,
+        default=choices.SocialMedia.TELEGRAM
     )
     link = models.URLField(verbose_name='Link')
 
     def __str__(self):
-        return f'соц.сеть: {self.title}'
+        return f'соц.сеть: {self.social_media}'
 
     class Meta:
         verbose_name = _('Ссылка')
@@ -58,13 +57,16 @@ class Link(models.Model):
 
 
 class Contact(models.Model):
-    streets = models.ManyToManyField(Street, verbose_name=_('Streets'), related_name='contact_streets')
-    phones = models.ManyToManyField(Phone, verbose_name=_('Phones'), related_name='contact_phones')
+    addresses = models.ManyToManyField(
+        Address,
+        verbose_name=_('Адрес'),
+        related_name='contact_address'
+    )
     email = models.EmailField(_('Email'))
     links = models.ManyToManyField(Link, verbose_name=_('Links'), related_name='contact_links')
 
     def __str__(self):
-        return f'Контакты\nУлицы: {", ".join(str(street) for street in self.streets.all())}'
+        return f'Контакты\nУлицы: {", ".join(str(street) for street in self.addresses.all())}'
 
     class Meta:
         verbose_name = _('Контакт')
