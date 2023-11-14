@@ -5,7 +5,7 @@ from common.models import BaseModel
 
 
 class Location(BaseModel):
-    name = models.CharField(
+    street = models.CharField(
         _('Улица'),
         max_length=80,
     )
@@ -22,7 +22,7 @@ class Location(BaseModel):
     )
 
     def __str__(self):
-        return f'филиал: {self.name}'
+        return f'филиал: {self.street}'
 
     class Meta:
         verbose_name = _('Прайс')

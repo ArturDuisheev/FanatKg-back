@@ -1,22 +1,25 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
+
 from contact import models as con_model
 
-# class StreetInline(admin.TabularInline):
-#     model = con_model.Street
-#     extra = 1
-#
-# class PhoneInline(admin.TabularInline):
-#     model = con_model.Phone
-#     extra = 1
-#
-# class LinkInline(admin.TabularInline):
-#     model = con_model.Link
-#     extra = 1
-#
-# class ContactAdmin(admin.ModelAdmin):
-#     inlines = (StreetInline, PhoneInline, LinkInline)
+from .translation import AddressTranslationOptions
 
-admin.site.register(con_model.Address)
+class AddressAdmin(TranslationAdmin):
+    list_display = ('address', )
+
+    class Media:
+        js = (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
+
+
+admin.site.register(con_model.Address, AddressAdmin)
 admin.site.register(con_model.Phone)
 admin.site.register(con_model.Link)
 admin.site.register(con_model.Contact)

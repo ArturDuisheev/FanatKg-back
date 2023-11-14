@@ -8,5 +8,5 @@ class VacancySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = vac_m.Vacancy
-        fields = ['id', 'title', 'description', 'requirement', 'condition', 'contact', 'url_for_vacancy', 'created_at']
+        exclude = ['title', 'description', 'address']
 

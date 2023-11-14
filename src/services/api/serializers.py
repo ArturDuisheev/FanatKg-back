@@ -7,4 +7,4 @@ class ServiceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = service_models.Service
-        fields = ['id', 'image', 'title', 'description']
+        exclude = ['title', 'description']

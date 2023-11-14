@@ -5,11 +5,7 @@ from price import models as price_models
 class PrivilegeSerializer(serializers.ModelSerializer):
     class Meta:
         model = price_models.Privilege
-        fields = (
-            'id',
-            'name',
-            'image',
-            'price_image')
+        exclude = ('name',)
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -17,11 +13,7 @@ class LocationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = price_models.Location
-        fields = (
-            'id',
-            'name',
-            'image',
-            'privilege')
+        exclude = ('street',)
 
     def create(self, validated_data):
         privileges_data = validated_data.pop('privilege', [])

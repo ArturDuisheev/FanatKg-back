@@ -14,7 +14,7 @@ class AddressSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = con_models.Address
-        fields = ('id', 'address', 'phones')
+        exclude = ('address', )
 
 
 class LinkSerializer(serializers.ModelSerializer):
@@ -43,7 +43,6 @@ class ContactSerializer(serializers.ModelSerializer):
             for phone_data in phones_data:
                 con_models.Phone.objects.create(**phone_data)
         for link_data in links_data:
-            print(link_data)
             link, created = con_models.Link.objects.get_or_create(**link_data)
             contact.links.add(link)
         return contact

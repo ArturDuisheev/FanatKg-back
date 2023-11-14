@@ -12,18 +12,12 @@ class Vacancy(BaseModel):
     description = models.TextField(
         _('Description')
     )
-    requirement = models.TextField(
-        _('Requirements')
+    address = models.CharField(
+        _('Address'),
+        max_length=100,
     )
-    condition = models.TextField(
-        _('Conditions')
-    )
-    contact = models.CharField(
-        _('Contacts'),
-        max_length=160
-    )
-    url_for_vacancy = models.URLField(
-        _('Google form'),
+    google_form = models.URLField(
+        _('Google Form'),
     )
 
     def __str__(self):

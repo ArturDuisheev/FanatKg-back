@@ -1,5 +1,6 @@
 from pathlib import Path
 from moneyed import add_currency
+from django.utils.translation import gettext_lazy as _
 
 from .env_reader import env
 
@@ -15,6 +16,7 @@ THEME_PARTY_APPS = [
     'djmoney',
     'phonenumber_field',
     'drf_yasg',
+    'modeltranslation',
 ]
 
 APPS = [
@@ -98,6 +100,13 @@ KGS = add_currency("SOM", "417", 100)
 
 CURRENCIES = ('SOM',)
 
+LANGUAGES = [
+    ('ky', _('Kyrgyz')),
+    ('ru', _('Russian')),
+    ('en', _('English')),
+    # Другие языки
+]
+
 USE_TZ = True
 
 STATIC_URL = '/static/'
@@ -129,5 +138,3 @@ else:
 if DEBUG:
     INTERNAL_IPS = ["127.0.0.1"]
     MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
-
-from .jazzmin import JAZZMIN_SETTINGS

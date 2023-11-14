@@ -1,5 +1,24 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 
-from services.models import Service
+from .models import Service
 
-admin.site.register(Service)
+from services.translation import ServiceTranslationOptions
+
+
+class ServiceAdmin(TranslationAdmin):
+    list_display = ('title', 'description')
+
+    class Media:
+        js = (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
+
+
+admin.site.register(Service, ServiceAdmin)
+
