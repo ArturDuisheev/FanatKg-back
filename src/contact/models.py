@@ -16,6 +16,9 @@ class Address(BaseModel):
         related_name='street_phone',
         verbose_name='Номер телефона'
     )
+    geolocation_address = models.URLField(
+        _('Address_url'),
+    )
 
     def __str__(self):
         return f"Филиал: {self.address}"
