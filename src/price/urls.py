@@ -10,4 +10,5 @@ router.register(r'privilege', views.PrivilegeViewSet, basename='privilege')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('seed/', views.start_seed, name='seed')
 ]
